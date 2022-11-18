@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Classroom Reservation </title>
+    </head>
+    <body>
+        <div style="width:300px;height:0px;margin:4vh auto;">
+            <form style="line-height:175%;" name="data">
+                日期：<input name="date" type="date"></input><br/>
+                开始时间：<input name="start" type="time"></input><br/>
+                结束时间：<input name="end" type="time"></input><br/>
+                预设事件（选择后直接生成）:<br/>
+                <div style="margin-left:2vw;">
+                    <input type="button" name="preset" value="全队会议" onclick="return Gen(value)"><br/>
+                    <input type="button" name="preset" value="组长会议" onclick="return Gen(value)"><br/>
+                    <input type="button" name="preset" value="硬件组培训" onclick="return Gen(value)"><br/>
+                    <input type="button" name="preset" value="软件组培训" onclick="return Gen(value)"><br/>
+                    <input type="button" name="preset" value="实验组培训" onclick="return Gen(value)"><br/>
+                    <input type="button" name="preset" value="前端组培训" onclick="return Gen(value)"><br/>
+                </div>
+                
+                其他活动请填写：<br/>
+                人数：<input type="number" name="number"></input><br/>
+                主题：<input type="text" name="theme"></input><br/>
+                内容：<input type="text" name="content"></input><br/>
+                备注：<textarea name="ps" rows="5" cols="30" aria-valuetext=""></textarea><br/>
+                <input style="width:100px;height:40px;margin:10px 100px;" type="button" onclick="return Generate()" value="生成"></input><br/>
+            </form>
+            结果：<p id="result" style="margin-top:-5px;margin-left:50px;width: 250px;height: 125px;font-size: 90%;">
+                </p>
+        </div>
+        <div style="margin: ;">
+
+        </div>
+        
+
+        <script>
+            function Generate(){
+                document.getElementById("result").innerHTML=
+                "时间："+document.forms["data"]["date"].value+"  "+
+                document.forms["data"]["start"].value+"~"+document.forms["data"]["end"].value+"<br/>"+
+                "人数："+document.forms["data"]["number"].value+"<br/>"+
+                "主题："+document.forms["data"]["theme"].value+"<br/>"+
+                "内容："+document.forms["data"]["content"].value+"<br/>"+
+                (document.forms["data"]["ps"].value!=""?"备注："+document.forms["data"]["ps"].value+"<br/>":"")
+                ;
+            }
+
+            function Gen(v){
+                let str="";
+                str+=("时间："+document.forms["data"]["date"].value+"  "+
+                document.forms["data"]["start"].value+"~"+document.forms["data"]["end"].value+"<br/>"+
+                "人数："+String(num(v))+("<br/>"+
+                "主题：iGEM"+String(v)+"<br/>"+
+                "内容：iGEM"+String(v)+"<br/>"));
+                document.getElementById("result").innerHTML=str;
+            }
+
+            function num(v){
+                switch(v){
+                    case "全队会议":    {return 30;break;}
+                    case "组长会议":    {return 10;break;}
+                    case "硬件组培训":  {return 11;break;}
+                    case "软件组培训":  {return 12;break;}
+                    case "实验组培训":  {return 13;break;}
+                    case "前端组培训":  {return 14;break;}
+                }
+
+            }
+        </script>
+    </body>
+</html>
+
+
